@@ -11,7 +11,7 @@
 //using namespace std;
 
 /**
- *  难道我成功了么  嘎嘎嘎阿迪萨斯按时打算
+ *  工程的名字不能是中文,github对中文支持的不好,以后命名最好是英文
  */
 typedef int ElemType;
 @interface ViewController ()
