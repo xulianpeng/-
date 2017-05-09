@@ -24,27 +24,80 @@ typedef int ElemType;
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     
+    
+    NSArray *array = [NSArray arrayWithObjects:@"1",@"2",@"3",@"4",@"2", nil];
+    NSMutableSet *set = [[NSMutableSet alloc]init];
+    for(NSString *str in array){
+        [set addObject:str];
+    }
+    NSLog(@"===%d",set.count);
     //八大算法
     
     //冒泡排序
-    NSArray *arr = @[@12,@2,@13,@9,@32,@5,@77,@36];
+    NSArray *arr = @[@12,@62,@13,@19,@32,@1,@45,@7,@3];
     NSMutableArray *theArr = [arr mutableCopy];
    
+//    BOOL isChange = YES;
+//    
+//    for (int i = 0; i < theArr.count && isChange; i ++) {
+//        
+//        isChange = NO;
+//        for (int j = 0; j < theArr.count - 1; j++) {
+//            if (theArr[j] > theArr[j+1]) {
+//                [theArr exchangeObjectAtIndex:j withObjectAtIndex:j+1];
+//                isChange = YES;
+//                NSLog(@"==%@",theArr);
+//            }
+//        }
+//    }
     
-    for (int i = 0; i < theArr.count; i ++) {
-        
-        for (int j = 0; j < theArr.count - 1; j++) {
-            if (theArr[j] > theArr[j+1]) {
-                [theArr exchangeObjectAtIndex:j withObjectAtIndex:j+1];
-            }
-        }
-    }
+//    for(int i = 0; i < theArr.count;i++)
+//    {
+//        for (int j = 0; j < theArr.count -1; j++) {
+//            
+//            if (theArr[j] < theArr[j+1]) {
+//                
+//                [theArr exchangeObjectAtIndex:j withObjectAtIndex:j+1];
+//                 NSLog(@"==%@",theArr);
+//            }
+//        }
+//    }
      NSLog(@"==%@",theArr);
     
-    //直接插入排序
-    [self insertionSort:theArr];
-   //快速排序
-    [self quickSort:theArr];
+    ///简单选择排序
+    
+    [self sempleSelcteSort:theArr];
+//    //直接插入排序
+//    [self insertionSort:theArr];
+//   //快速排序
+//    [self quickSort:theArr];
+    
+}
+- (void)sempleSelcteSort:(NSMutableArray *)list
+{
+    
+    int i, j,min;
+    
+    for (i = 1; i < list.count; i++) {
+        
+        min = 1;
+        
+        for (j = i+1; j < list.count; j++) {
+            
+            if (list[min] > list[j]) {
+                
+                min = j;
+            }
+        }
+        
+        if (i != min) {
+            
+            [list exchangeObjectAtIndex:i withObjectAtIndex:min];
+            
+            NSLog(@"===%@",list);
+        }
+    }
+    
     
 }
 - (void)insertionSort:(NSMutableArray *)list{
@@ -354,8 +407,41 @@ typedef int ElemType;
     }
 }
 
+#pragma mark - 算法时间度的分析:
+- (void)sumFenxi
+{
+    //算法1
+    int i= 0, sum1 = 0 ,n = 100;  //执行了1次
+    
+    for (i = 1; i <= n; i++) {
+        sum1 = sum1 + 1;          //执行了n+1次
+    }
+    NSLog(@"sum == %d",sum1);     //执行了1次
+}
+- (void)sumFenxi2
+{
+    //算法2
+    int  sum2 = 0 ,n2 = 100;      //执行了1次
+    
+    sum2 = (1 + n2) * n2 / 2;      //执行了1次
+    NSLog(@"sum == %d",sum2);      //执行了1次
+}
+- (void)sumFenxi3
+{
+    //算法3
+    
+    int i= 0, x = 0 , sum = 0, n = 100;  //执行了1次
+    
+    for (i = 1; i <= n; i++) {
+        for (int j = 0; j<= n ; j++) {
+            x++;
+            
+            sum = sum + x;
+        }          //执行了n * n次
+    }
 
-
+    NSLog(@"sum == %d ",sum); //执行了1次
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
